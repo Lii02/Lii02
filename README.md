@@ -4,7 +4,7 @@
 My name is Luke Inlow, I am from Virginia and I am 21 years old. I've been programming since I was around 12 years old. I've worked on projects such as operating systems, compilers, video games, game engines, and full stack web apps.
 
 ## Links
-[📝 Portfolio](lii02.gihub.io/portfolio)
+[📝 Portfolio](https://lii02.github.io/portfolio/)
 
 <!--
 **Lii02/Lii02** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
