@@ -7,7 +7,8 @@ My name is Luke Inlow, I am from Virginia and I am 21 years old. I've been progr
 [📝 Portfolio](https://lii02.github.io/portfolio/)
 
 ## Contact
-[Email](mailto:lukeinlow@gmail.com)
+[lukeinlow@gmail.com](mailto:lukeinlow@gmail.com) \
+Discord: li02
 
 <!--
 **Lii02/Lii02** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
