@@ -1,7 +1,7 @@
 # Li02 🎮🖥️
 
 ## About Me
-My name is Luke Inlow, I am from Virginia and I am 21 years old. I've been programming since I was around 12 years old. I've worked on projects such as operating systems, compilers, video games, game engines, and full stack web apps.
+I am a software developer with a focus on game development, is seeking a new opportunity to apply my skills and experience to create innovative software and games. I have a strong understanding of JavaScript, TypeScript, React, Git, SQL, HTML, CSS, Python, C#, and Java. I am also proficient in teamwork and leadership, agile and waterfall development, problem solving, continuous learning, and persistence. In my previous roles, I have developed a variety of games, including a sign-in system using React and Flask, a FPS dungeon game with gameplay, audio, AI, and UI programming, and minigames for a Universal Phoenix Group game. I am a creative and passionate developer who is always eager to learn new things and take on new challenges. I am confident that I have the skills and experience necessary to be a valuable asset to any team.
 
 ## Links
 [📝 Portfolio](https://lii02.github.io/portfolio/)
