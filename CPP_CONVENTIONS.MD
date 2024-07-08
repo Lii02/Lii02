@@ -94,3 +94,10 @@ Definitions should be in screaming snake case, like so:
 ```
 ## Consts
 Consts are discouraged, but they aren't advised either, they should only be used if the value can not and should not be modified.
+## Namespaces
+Namespaces should be in pascal case, like so:
+```cpp
+namespace TestNamespace {
+    // Declarations
+}
+```
