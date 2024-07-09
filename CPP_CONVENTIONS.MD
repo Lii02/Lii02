@@ -93,7 +93,7 @@ Definitions should be in screaming snake case, like so:
 #define TEST_DEF 0x17
 ```
 ## Consts
-Consts are discouraged, but they aren't advised either, they should only be used if the value can not and should not be modified.
+Consts variables aren't discouraged, but they aren't encouraged either, they should only be used if the value can not and should not be modified. Const functions are encouraged, to keep code clean, if you write a function that does modify a variable, you should create a seperate function for it or mark the variable as 'mutable'.
 ## Namespaces
 Namespaces should be in pascal case, like so:
 ```cpp
