@@ -101,3 +101,5 @@ namespace TestNamespace {
     // Declarations
 }
 ```
+## Misc
+- Autos are *FORBIDDEN*.
