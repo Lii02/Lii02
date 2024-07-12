@@ -102,4 +102,4 @@ namespace TestNamespace {
 }
 ```
 ## Misc
-- Autos are *FORBIDDEN*.
+- Autos are **FORBIDDEN**.
