@@ -42,7 +42,7 @@ class System {
     static int Whatever = 23;
 }
 ```
-Static variables should follow the regular variables naming convention.
+Static variables should follow the pascal naming convention.
 ## Classes
 Classes should start with 'li', and be in pascal case afterwards, like so:
 ```cpp
