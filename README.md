@@ -5,6 +5,7 @@ I am a software developer with a focus on game development, seeking a new opport
 
 ## Links
 [📝 Portfolio](https://lii02.github.io/portfolio/)
+[My C++ Conventions](CPP_CONVENTIONS.MD)
 
 ## Contact
 [lukeinlow@gmail.com](mailto:lukeinlow@gmail.com) \
