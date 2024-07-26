@@ -69,7 +69,7 @@ struct testStruct_t {
 };
 ```
 ## Enums
-Enums follow the same rules as typedefs and enums. Type specification and value specification with enums is optional. Enum values should be in screaming snake case, and should be unique to the program to avoid errors, like so:
+Enums follow the same rules as typedefs and enums. Type specification and value specification with enums is optional. Enum values should be in screaming snake case, and should be unique (if enum is not identified as 'enum class') to the program to avoid errors, like so:
 ```cpp
 enum testEnum_t : int {
     VALUE = 0,
