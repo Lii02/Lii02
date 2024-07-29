@@ -55,6 +55,13 @@ private:
 };
 ```
 The public section should be above the private and protected section.
+## Interfaces
+Interfaces should be structs, and should start with letter 'I', and do not have to have 'li' in front.
+```cpp
+struct IInterface {
+    // Whatever
+};
+```
 ## Typedefs
 Typedefs should be in camel case, with '_t' at the end, like so:
 ```cpp
