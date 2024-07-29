@@ -95,9 +95,11 @@ void _PrivateFunction() {
 }
 ```
 ## Defintions
-Definitions should be in screaming snake case, like so:
+Variable definitions should be in screaming snake case, while function macros can be in camel case or screaming snake case.
 ```cpp
 #define TEST_DEF 0x17
+#define testMacro(x) func(x)
+#define TEST_MACRO2(x) func(x)
 ```
 ## Consts
 Consts variables aren't discouraged, but they aren't encouraged either, they should only be used if the value can not and should not be modified. Const functions are encouraged, to keep code clean, if you write a function that does modify a variable, you should create a seperate function for it or mark the variable as 'mutable'.
