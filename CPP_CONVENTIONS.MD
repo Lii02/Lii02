@@ -1,4 +1,5 @@
 # C++ Coding Conventions
+These are my go-to conventions, but not all of my projects follow them.
 ## Spacing
 There should be no line wasted, curly braces should share the line of the statement or declaration, like so:
 ```cpp
