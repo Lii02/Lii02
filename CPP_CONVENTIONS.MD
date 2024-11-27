@@ -1,5 +1,6 @@
 # C++ Coding Conventions
-These are my go-to conventions, but not all of my projects follow them.
+## About
+These are my go-to conventions for my C++ projects. Not all of my projects follow them, depending on the nature of the project.
 ## Spacing
 There should be no line wasted, curly braces should share the line of the statement or declaration, like so:
 ```cpp
