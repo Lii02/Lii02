@@ -16,6 +16,7 @@ if(whatever) {
     // Code
 }
 ```
+There should also be spacing in between constants, operators, and identifiers.
 ## Comments
 Single line comments should have spacing after the slashes, like so:
 ```cpp
@@ -38,7 +39,7 @@ Class variables and local variables should follow camel case, like so:
 ```cpp
 int helloWorld = 23;
 ```
-Global variables are **NOT ALLOWED!**, Instead of globals, use singletons and static variables, like so:
+Global variables are generally **NOT ALLOWED!**, Instead of globals, use singletons and static variables, like so:
 ```cpp
 class System {
     static int Whatever = 23;
@@ -56,7 +57,7 @@ private:
     int ID;
 };
 ```
-The public section should be above the private and protected section.
+The public section should be above the private and protected section. If you use a struct instead of a class, follow the same conventions.
 ## Interfaces
 Interfaces should be structs, and should start with letter 'I', and do not have to have 'li' in front.
 ```cpp
