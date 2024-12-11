@@ -97,6 +97,8 @@ void _PrivateFunction() {
     // Other code
 }
 ```
+### Getters/Setters
+Getter function names can optionally have 'Get' in the beginning, And setter functions should always have 'Set' in the beginning.
 ## Defintions
 Variable definitions should be in screaming snake case, while function macros can be in camel case or screaming snake case.
 ```cpp
