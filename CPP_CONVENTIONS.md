@@ -1,8 +1,13 @@
 # C++ Coding Conventions
+
 ## About
+
 These are my go-to conventions for my C++ projects. Not all of my projects follow them, depending on the nature of the project.
+
 ## Spacing
+
 There should be no line wasted, curly braces should share the line of the statement or declaration, like so:
+
 ```cpp
 if(whatever) {
     // Code
@@ -10,44 +15,63 @@ if(whatever) {
     // Other code
 }
 ```
+
 Statements that have 1 line of code should still use curly braces for readability, like so:
+
 ```cpp
 if(whatever) {
     // Code
 }
 ```
+
 There should also be spacing in between constants, operators, and identifiers.
+
 ## Comments
+
 Single line comments should have spacing after the slashes, like so:
+
 ```cpp
 // This is a comment
 /* This is another comment */
 ```
+
 Multiline comments should only be used for documentation, and should follow single lines spacing rules, like so:
+
 ```cpp
 /*
 * This is a documentation comment
 */
 ```
+
 Commented code is not allowed:
+
 ```cpp
 /*printf("Hello");
 printf("World");*/
 ```
+
 ## Variables
+
 Class variables and local variables should follow camel case, like so:
+
 ```cpp
 int helloWorld = 23;
 ```
+
 Global variables are generally **NOT ALLOWED!**, Instead of globals, use singletons and static variables, like so:
+
 ```cpp
 class System {
     static int Whatever = 23;
 }
 ```
+
 Static variables should follow the pascal naming convention.
+
 ## Classes
+
 Classes should start with 'li', and be in pascal case afterwards, like so:
+
 ```cpp
 class liQuad {
 public:
@@ -57,37 +81,53 @@ private:
     int ID;
 };
 ```
+
 The public section should be above the private and protected section. If you use a struct instead of a class, follow the same conventions.
+
 ## Interfaces
+
 Interfaces should be structs, and should start with letter 'I', and do not have to have 'li' in front.
+
 ```cpp
 struct IInterface {
     // Whatever
 };
 ```
+
 ## Typedefs
+
 Typedefs should be in camel case, with '_t' at the end, like so:
+
 ```cpp
 typedef unsigned char myTypedef_t;
 ```
+
 ## Structs
+
 Structs follow similar rules to typedefs, and be lightweight, with no functions, like so:
+
 ```cpp
 struct testStruct_t {
     int x;
     int y;
 };
 ```
+
 ## Enums
+
 Enums follow the same rules as typedefs and enums. Type specification and value specification with enums is optional. Enum values should be in screaming snake case, and should be unique (if enum is not identified as 'enum class') to the program to avoid errors, like so:
+
 ```cpp
 enum testEnum_t : int {
     VALUE = 0,
     VALUE2
 };
-``` 
+```
+
 ## Functions/Methods
+
 Public and private functions should be in pascal case, with a '_' being in the front of the private functions name, like so:
+
 ```cpp
 void PublicFunction() {
     // Code
@@ -97,23 +137,35 @@ void _PrivateFunction() {
     // Other code
 }
 ```
+
 ### Getters/Setters
+
 Getter function names can optionally have 'Get' in the beginning, And setter functions should always have 'Set' in the beginning.
+
 ## Defintions
+
 Variable definitions should be in screaming snake case, while function macros can be in camel case or screaming snake case.
+
 ```cpp
 #define TEST_DEF 0x17
 #define testMacro(x) func(x)
 #define TEST_MACRO2(x) func(x)
 ```
+
 ## Consts
+
 Consts variables aren't discouraged, but they aren't encouraged either, they should only be used if the value can not and should not be modified. Const functions are encouraged, to keep code clean, if you write a function that does modify a variable, you should create a seperate function for it or mark the variable as 'mutable'.
+
 ## Namespaces
+
 Namespaces should be in pascal case, like so:
+
 ```cpp
 namespace TestNamespace {
     // Declarations
 }
 ```
+
 ## Misc
+
 - Autos are **FORBIDDEN**, unless absolutely necessary.
