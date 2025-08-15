@@ -5,12 +5,16 @@ I am a software developer with a focus on game development, seeking a new opport
 
 ## Links
 [📝 Portfolio](https://lukeinlow.listudios.io/) \
-[My C++ Conventions](CPP_CONVENTIONS.md) \
-[My JavaScript/TypeScript Conventions](JS_CONVENTIONS.md)
+[My C++ Conventions](CPP_CONVENTIONS.md)
 
 ## Contact
 [lukeinlow@gmail.com](mailto:lukeinlow@gmail.com) \
 Discord: li02
+
+## Stats
+![Lii02's Stats](https://github-readme-stats.vercel.app/api?username=Lii02&theme=dracula&show_icons=true&hide_border=false&count_private=true)
+![Lii02's Streak](https://github-readme-streak-stats.herokuapp.com/?user=Lii02&theme=dracula&hide_border=false)
+![Lii02's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Lii02&theme=dracula&show_icons=true&hide_border=false&layout=compact)
 
 <!--
 **Lii02/Lii02** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
