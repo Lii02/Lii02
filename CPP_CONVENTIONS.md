@@ -1,12 +1,72 @@
 # C++ Coding Conventions
 
-## About
+These are my go-to conventions for C++ projects. Not every project follows them, depending on its nature, but they are my preferred standard. The goal is readability and consistency, built on modern C++17.
 
-These are my go-to conventions for my C++ projects. Not all of my projects follow them, depending on the nature of the project.
+Most of these rules are enforced automatically:
 
-## Spacing
+* [`.clang-format`](.clang-format) handles layout: indentation, braces, spacing, include order.
+* [`.clang-tidy`](.clang-tidy) handles naming and common mistakes.
 
-There should be no line wasted, curly braces should share the line of the statement or declaration, like so:
+Rules marked **(review)** can't be checked by tools and are enforced in code review.
+
+---
+
+## 🛠️ Tooling
+
+Drop both files in the root of a project. Most editors pick them up automatically (Visual Studio, VS Code with the C/C++ extension, CLion, Rider).
+
+```sh
+clang-format -i src/*.cpp src/*.h             # Format files in place
+clang-format --dry-run --Werror src/*.cpp     # Check formatting (for CI)
+clang-tidy src/*.cpp -p build                 # Lint, using build/compile_commands.json
+```
+
+* `.clang-format` requires **clang-format 16 or newer**.
+* Naming violations are errors in clang-tidy. Everything else is a warning.
+
+---
+
+## 📁 Files
+
+* **Extensions:** `.h` for headers, `.cpp` for source files.
+* **Headers** declare interfaces and classes. **Source files** contain the implementations. Short one-line methods inside a class body are fine in headers.
+* **Header guards:** Always use `#pragma once`.
+
+### Includes
+
+Includes form a single block with no blank lines. They're sorted alphabetically in this order:
+
+1. The matching header (`Quad.cpp` includes `Quad.h` first)
+2. Project headers in quotes
+3. Third-party headers in angle brackets (`<glm/glm.h>`)
+4. Standard library headers (`<vector>`)
+
+```cpp
+#include "Quad.h"
+#include "Engine/Core.h"
+#include <glm/glm.h>
+#include <vector>
+```
+
+---
+
+## 📐 Formatting
+
+| Rule | Setting |
+|-|-|
+| Indentation | 4 spaces, no tabs |
+| Line length | 120 columns |
+| Braces | K&R: opening brace on the same line, always |
+| Single-line blocks | Always use braces |
+| Control keywords | No space before the parenthesis: `if(x)`, `for(...)`, `while(x)` |
+| Pointers / references | Bind to the type: `int* p`, `const Quad& quad` |
+| Namespaces | Contents are **not** indented; closing brace gets a `// namespace Name` comment |
+| Access modifiers | Flush with the `class` keyword |
+| Templates | `template<typename T>` on its own line |
+
+### Braces
+
+Curly braces share the line of the statement or declaration. No line is wasted.
 
 ```cpp
 if(whatever) {
@@ -16,156 +76,241 @@ if(whatever) {
 }
 ```
 
-Statements that have 1 line of code should still use curly braces for readability, like so:
+Statements with a single line of code still use braces.
 
 ```cpp
 if(whatever) {
-    // Code
+    DoThing();
 }
 ```
 
-There should also be spacing in between constants, operators, and identifiers.
+### Spacing
 
-## Comments
+Binary operators, constants and identifiers are always separated by spaces.
 
-Single line comments should have spacing after the slashes, like so:
+```cpp
+int total = count * factor; // Good
+int total=count*factor;     // Bad
+```
+
+### Short Functions
+
+One-line functions are allowed **only inside a class body**. Free functions and out-of-class definitions are always expanded.
+
+```cpp
+class Quad {
+public:
+    int GetId() const { return id; }
+};
+
+int Add(int a, int b) {
+    return a + b;
+}
+```
+
+### Namespaces
+
+```cpp
+namespace Render {
+
+class Quad;
+
+} // namespace Render
+```
+
+---
+
+## 💬 Comments
+
+Single-line comments have a space after the slashes.
 
 ```cpp
 // This is a comment
-/* This is another comment */
 ```
 
-Multiline comments should only be used for documentation, and should follow single lines spacing rules, like so:
+Multi-line `/* */` comments are used only for documentation.
 
 ```cpp
 /*
-* This is a documentation comment
-*/
+ * @brief Draws the quad to the active framebuffer.
+ */
+void Draw();
 ```
 
-Commented code is not allowed:
+**(review)** Commented-out code is not allowed. Delete it, and version control will remember it.
 
 ```cpp
-/*printf("Hello");
-printf("World");*/
+/* printf("Hello");
+printf("World"); */ // Not allowed
 ```
 
-## Variables
+---
 
-Class variables and local variables should follow camel case, like so:
+## 🏷️ Naming
+
+| Element | Convention | Example |
+|-|-|-|
+| Classes | `PascalCase` | `Quad`, `SystemManager` |
+| Interfaces | `I` + `PascalCase`, declared as `struct` | `IWorker`, `IRenderable` |
+| Structs (plain data) | `PascalCase` | `Vec2`, `VertexData` |
+| Enums | `PascalCase`, using `enum class` | `RenderMode` |
+| Enum values | `SCREAMING_SNAKE_CASE` | `FORWARD`, `DEFERRED` |
+| Typedefs / `using` aliases | `camelCase_t` | `byte_t`, `index_t` |
+| Template parameters | `T` or `PascalCase` | `T`, `TValue` |
+| Namespaces | `PascalCase` | `Render`, `Engine` |
+| Functions / methods | `PascalCase` | `GetUserName()`, `Draw()` |
+| Private methods | `_` + `PascalCase` | `_RebuildBuffers()` |
+| Local / member variables | `camelCase` | `vertexCount` |
+| Parameters | `camelCase` | `newId` |
+| Static member variables | `PascalCase` | `static int InstanceCount;` |
+| `constexpr` / namespace or class-scope constants | `PascalCase` | `constexpr int MaxLights = 8;` |
+| Local `const` variables | `camelCase` | `const int doubled = value * 2;` |
+| Macros (`#define`) | `SCREAMING_SNAKE_CASE` | `#define TEST_DEF 0x17` |
+| Function macros | `SCREAMING_SNAKE_CASE` or `camelCase` | `#define LOG_ERROR(x)`, `#define testMacro(x)` |
+
+### Notes
+
+* **Getters** may start with `Get`. **Setters** must start with `Set`.
+* **Member variables** have no prefix. Use `this->` when a parameter shadows a member.
+* **Private methods:** names starting with `_` and a capital letter are technically reserved by the C++ standard. This is a deliberate choice; it works on MSVC, GCC and Clang. (clang-tidy's `bugprone-reserved-identifier` is disabled for this reason.)
+* **Interfaces:** clang-tidy treats any abstract type (one with a pure virtual method) as an interface and requires the `I` prefix.
+
+---
+
+## 🏗️ Language Elements
+
+### Classes
+
+The `public` section comes first, followed by `protected`, then `private`.
 
 ```cpp
-int helloWorld = 23;
-```
-
-Global variables are generally **NOT ALLOWED!**, Instead of globals, use singletons and static variables, like so:
-
-```cpp
-class System {
-    static int Whatever = 23;
-}
-```
-
-Static variables should follow the pascal naming convention.
-
-## Classes
-
-Classes should start with 'li', and be in pascal case afterwards, like so:
-
-```cpp
-class liQuad {
+class Quad {
 public:
     Quad();
     ~Quad();
+
+    int GetId() const { return id; }
+    void SetId(int newId);
+
+    static int InstanceCount;
+
 private:
-    int ID;
+    void _RebuildBuffers();
+
+    int id = 0;
 };
 ```
 
-The public section should be above the private and protected section. If you use a struct instead of a class, follow the same conventions.
+### Interfaces
 
-## Interfaces
-
-Interfaces should be structs, and should start with letter 'I', and do not have to have 'li' in front.
+Interfaces are `struct`s that start with `I` and contain only pure virtual methods and a virtual destructor.
 
 ```cpp
-struct IInterface {
-    // Whatever
+struct IWorker {
+    virtual ~IWorker() = default;
+    virtual void Run() = 0;
 };
 ```
 
-## Typedefs
+### Structs
 
-Typedefs should be in camel case, with '_t' at the end, like so:
-
-```cpp
-typedef unsigned char myTypedef_t;
-```
-
-## Structs
-
-Structs follow similar rules to typedefs, and be lightweight, with no functions, like so:
+Structs are lightweight data bundles with **no methods** **(review)**.
 
 ```cpp
-struct testStruct_t {
+struct Vec2 {
     int x;
     int y;
 };
 ```
 
-## Enums
+### Enums
 
-Enums follow the same rules as typedefs and enums. Type specification and value specification with enums is optional. Enum values should be in screaming snake case, and should be unique (if enum is not identified as 'enum class') to the program to avoid errors, like so:
+Always use `enum class`. Specifying the underlying type and values is optional. If a plain `enum` is unavoidable (for example, a C API), its values must be unique across the program.
 
 ```cpp
-enum testEnum_t : int {
-    VALUE = 0,
-    VALUE2
+enum class RenderMode : int {
+    FORWARD = 0,
+    DEFERRED // Automatically increments from the previous value
 };
 ```
 
-## Functions/Methods
+### Typedefs
 
-Public and private functions should be in pascal case, with a '_' being in the front of the private functions name, like so:
+`typedef` and `using` are both fine. Names are `camelCase` with a `_t` suffix.
 
 ```cpp
-void PublicFunction() {
-    // Code
-}
-
-void _PrivateFunction() {
-    // Other code
-}
+typedef unsigned char byte_t;
+using index_t = unsigned int;
 ```
 
-### Getters/Setters
+### Const
 
-Getter function names can optionally have 'Get' in the beginning, And setter functions should always have 'Set' in the beginning.
+* **Encouraged:** Mark anything that doesn't change as `const`, including variables, parameters passed by reference, and methods.
+* **Const methods:** Methods that don't modify object state must be `const`. If a method needs to modify state, write a separate non-const method, or mark the member `mutable` when it's an implementation detail such as a cache.
+* **Prefer `constexpr` over `#define`** for constant values.
 
-## Defintions
+```cpp
+constexpr int MaxLights = 8; // Preferred
+#define MAX_LIGHTS 8         // Avoid for plain values
+```
 
-Variable definitions should be in screaming snake case, while function macros can be in camel case or screaming snake case.
+### Macros
+
+Use macros only when something can't be done with `constexpr`, templates or inline functions, such as logging with `__FILE__` and `__LINE__`, or platform switches.
 
 ```cpp
 #define TEST_DEF 0x17
-#define testMacro(x) func(x)
-#define TEST_MACRO2(x) func(x)
+#define testMacro(x) Func(x)
+#define TEST_MACRO2(x) Func(x)
 ```
 
-## Consts
+---
 
-Consts variables aren't discouraged, but they aren't encouraged either, they should only be used if the value can not and should not be modified. Const functions are encouraged, to keep code clean, if you write a function that does modify a variable, you should create a seperate function for it or mark the variable as 'mutable'.
+## 🧠 Memory
 
-## Namespaces
-
-Namespaces should be in pascal case, like so:
+* **No raw owning pointers.** Ownership is expressed with smart pointers, either the standard ones (`std::unique_ptr`, `std::shared_ptr`) or the project's own smart pointer types.
+* **No manual `new` / `delete` or `malloc` / `free`.** Use `std::make_unique` / `std::make_shared`, or the project's equivalent factory.
+* Raw pointers and references are fine when they **don't own** the object.
 
 ```cpp
-namespace TestNamespace {
-    // Declarations
-}
+std::unique_ptr<Quad> quad = std::make_unique<Quad>(); // Owns
+void Draw(const Quad& quad);                           // Borrows
+Quad* FindQuad(int id);                                // Borrows, may be null
 ```
 
-## Misc
+---
 
-- Autos are **FORBIDDEN**, unless absolutely necessary.
+## 🚫 Forbidden
+
+### `auto` **(review)**
+
+`auto` is **forbidden**, with these exceptions:
+
+* **Lambdas**, whose type can't be written out.
+* **Iterators**, where the full type is long and adds nothing.
+* **Structured bindings**, which require `auto`.
+
+```cpp
+auto onClick = [this](int button) { _HandleClick(button); }; // OK
+for(auto it = quads.begin(); it != quads.end(); ++it) {      // OK
+}
+for(const auto& [id, quad] : quadsById) {                     // OK
+}
+
+auto count = quads.size(); // Not allowed: write size_t
+```
+
+Any other use needs a justification in the code review.
+
+### Global Variables
+
+Mutable global variables are **not allowed** (clang-tidy warns). Use singletons for true global services, static class members, or pass dependencies in.
+
+```cpp
+class System {
+public:
+    static int Whatever;
+};
+```
+
+Global `constexpr` / `const` values are fine.
