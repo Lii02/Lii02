@@ -1,6 +1,6 @@
 # C++ Coding Conventions
 
-These are my go-to conventions for C++ projects. Not every project follows them, depending on its nature, but they are my preferred standard. The goal is readability and consistency, built on modern C++17.
+These are my go-to conventions for C++ projects. The goal is readability and consistency, built on modern C++17.
 
 Most of these rules are enforced automatically:
 
@@ -29,6 +29,8 @@ clang-tidy src/*.cpp -p build                 # Lint, using build/compile_comman
 ## 📁 Files
 
 * **Extensions:** `.h` for headers, `.cpp` for source files.
+* **File names** **(review)**: `PascalCase`, matching the main class they contain (`Quad` lives in `Quad.h` / `Quad.cpp`). Directories follow the same rule (`Engine/Core.h`).
+* **One class per file pair.** Small helper types used only by that class may share its files.
 * **Headers** declare interfaces and classes. **Source files** contain the implementations. Short one-line methods inside a class body are fine in headers.
 * **Header guards:** Always use `#pragma once`.
 
@@ -252,6 +254,21 @@ using index_t = unsigned int;
 ```cpp
 constexpr int MaxLights = 8; // Preferred
 #define MAX_LIGHTS 8         // Avoid for plain values
+```
+
+### Casting **(review)**
+
+Use the C++ named casts. C-style casts `(int)x` and functional casts `int(x)` are **not allowed**: they hide which conversion is happening and are hard to search for.
+
+* **`static_cast`** for ordinary conversions (numeric types, enums, up/down casts with a known type). This should cover almost every cast.
+* **`dynamic_cast`** only when the runtime type is genuinely unknown. Prefer virtual methods where possible.
+* **`const_cast`** and **`reinterpret_cast`** need a comment explaining why, and a justification in the code review.
+
+```cpp
+int index = static_cast<int>(value);               // Good
+int mode = static_cast<int>(RenderMode::DEFERRED); // Good
+int index = (int)value;                            // Not allowed
+int index = int(value);                            // Not allowed
 ```
 
 ### Macros
