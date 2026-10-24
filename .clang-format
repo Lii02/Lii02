@@ -17,7 +17,7 @@ FixNamespaceComments: true
 IndentPPDirectives: None
 
 # Line length
-ColumnLimit: 120
+ColumnLimit: 140
 
 # Braces: K&R, always attached, always present
 BreakBeforeBraces: Attach
