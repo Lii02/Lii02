@@ -57,7 +57,7 @@ Includes form a single block with no blank lines. They're sorted alphabetically 
 | Rule | Setting |
 |-|-|
 | Indentation | 4 spaces, no tabs |
-| Line length | 120 columns |
+| Line length | 140 columns |
 | Braces | K&R: opening brace on the same line, always |
 | Single-line blocks | Always use braces |
 | Control keywords | No space before the parenthesis: `if(x)`, `for(...)`, `while(x)` |
